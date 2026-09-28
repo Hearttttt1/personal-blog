@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Environment and local data
+.env
+.env.*
+data/
+backups/
+backups_/
+logs/
+tmp/
+
+# Quartz build output
+public/
+.quartz-cache/
+.quartz/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
