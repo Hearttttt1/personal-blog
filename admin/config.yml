@@ -3,6 +3,7 @@ backend:
   repo: Hearttttt1/personal-blog
   branch: main
   skip_ci: true
+  auth_methods: [token]
 
 media_folder: content/assets
 public_folder: /personal-blog/assets
