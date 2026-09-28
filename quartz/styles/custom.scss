@@ -1,3 +1,14 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// 首页已有正文标题，无需重复显示站点名和页面日期。
+body[data-slug="index"] .page-header,
+.recent-notes:has(.recent-ul:empty) {
+  display: none;
+}
+
+article h1,
+article h2,
+article h3 {
+  font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+  letter-spacing: 0.02em;
+}
