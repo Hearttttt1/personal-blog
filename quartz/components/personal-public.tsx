@@ -31,7 +31,7 @@ export const PersonalHome: QuartzComponent = ({ fileData, allFiles }: QuartzComp
     <section class="personal-home-feed" aria-labelledby="personal-posts-title">
       <div class="personal-feed-head">
         <div>
-          <p class="personal-eyebrow">PUBLIC NOTES</p>
+          <p class="personal-eyebrow">公开文章</p>
           <h2 id="personal-posts-title">最近写下</h2>
         </div>
         <a class="personal-more" href={linkFrom(current, "posts/index")}>
@@ -112,7 +112,7 @@ export const PersonalFooter: QuartzComponent = ({ fileData }: QuartzComponentPro
   <footer class="personal-footer">
     <span>把日常经验，慢慢写成自己的资料库。</span>
     <span>
-      Markdown · Git 内容源 · <a href={linkFrom(fileData.slug as FullSlug, "posts/index")}>全部文章</a>
+      文章以 Markdown 保存 · <a href={linkFrom(fileData.slug as FullSlug, "posts/index")}>全部文章</a>
     </span>
   </footer>
 )

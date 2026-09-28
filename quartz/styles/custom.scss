@@ -52,7 +52,7 @@ article h1, article h2, article h3, .personal-home-feed h2, .personal-home-feed 
 body[data-slug="index"] .page-header { display: none; }
 body[data-slug="index"] .center > article { max-width: none; }
 body[data-slug="index"] .center > article .markdown-rendered { padding: 10px 0 30px; border-bottom: 1px solid #d9dce1; }
-body[data-slug="index"] .home-eyebrow, .personal-eyebrow { margin: 0; color: #8a8f98; font-size: 11px; letter-spacing: .16em; }
+body[data-slug="index"] article .markdown-rendered > p:first-child, .personal-eyebrow { margin: 0; color: #8a8f98; font-size: 11px; letter-spacing: .16em; }
 body[data-slug="index"] article h1 { max-width: 660px; margin: 13px 0 14px; color: #20252d; font-size: clamp(36px, 5vw, 58px); line-height: 1.16; letter-spacing: -.025em; }
 body[data-slug="index"] article p:not(.home-eyebrow) { max-width: 650px; margin: 9px 0; color: #5e6570; font-size: 15px; line-height: 1.8; }
 
