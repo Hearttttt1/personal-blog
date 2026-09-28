@@ -1,3 +1,4 @@
+import "./base64-polyfill.js"
 import CMS from "@sveltia/cms"
 
 // 保存前写入时间：首次发布保留原时间，每次保存更新修改时间。
