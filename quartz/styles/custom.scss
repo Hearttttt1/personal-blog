@@ -1,14 +1,122 @@
 @use "./variables.scss" as *;
 
-// 首页已有正文标题，无需重复显示站点名和页面日期。
-body[data-slug="index"] .page-header,
-.recent-notes:has(.recent-ul:empty) {
-  display: none;
+// 公开站点沿用原型的文字主导布局：顶栏、文章列表和宽松的阅读区域。
+body { background: #f3f4f7; color: #20252d; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; }
+.page { max-width: none; }
+.page > #quartz-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas: "grid-sidebar-left" "grid-center" "grid-footer";
+  gap: 0;
+  min-height: 100vh;
+  padding: 0;
+}
+.page > #quartz-body > .left.sidebar {
+  grid-area: grid-sidebar-left;
+  position: static;
+  height: auto;
+  min-height: 72px;
+  padding: 0 clamp(20px, 5vw, 76px);
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  background: #fff;
+  border-bottom: 1px solid #e8e9ec;
+}
+.left.sidebar > .page-title, .left.sidebar > .mobile-only, .left.sidebar > .recent-notes { display: none; }
+.personal-nav { display: flex; flex: 1 1 auto; align-items: center; gap: clamp(24px, 4vw, 64px); min-width: 0; }
+.personal-brand { display: flex; flex: 0 0 auto; align-items: center; gap: 12px; color: #20252d; font-weight: 400; }
+.personal-brand:hover { color: #1677ff; }
+.personal-brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; font: 18px Georgia, "Songti SC", serif; }
+.personal-brand strong, .personal-brand small { display: block; }
+.personal-brand strong { font: 17px Georgia, "Songti SC", serif; letter-spacing: .04em; }
+.personal-brand small { color: #8a8f98; font-size: 11px; }
+.personal-nav-links { display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); align-self: stretch; white-space: nowrap; }
+.personal-nav-links a { display: flex; align-items: center; border-bottom: 2px solid transparent; color: #69707b; font-size: 14px; font-weight: 400; }
+.personal-nav-links a:hover, .personal-nav-links a[aria-current="page"] { color: #20252d; border-bottom-color: #1677ff; }
+.left.sidebar > .flex-component { flex: 0 0 auto; align-items: center; margin-left: auto; }
+.left.sidebar .search-button { min-width: 36px; border: 0; background: transparent; }
+.left.sidebar .search-button p { display: none; }
+.left.sidebar .search-button svg { width: 20px; }
+
+.page > #quartz-body > .center { grid-area: grid-center; width: min(1160px, calc(100% - 48px)); max-width: 1160px; min-width: 0; margin: 0 auto; padding: 44px 0 64px; }
+.page > #quartz-body > .right.sidebar, .page > #quartz-body > .center > hr { display: none; }
+.page > #quartz-body > .center > .page-footer { margin: 0; }
+.page > #quartz-body > .center > .page-header { margin: 0 0 28px; }
+.personal-footer { grid-area: grid-footer; display: flex; justify-content: space-between; gap: 16px; width: min(1160px, calc(100% - 48px)); max-width: 1160px; min-width: 0; margin: 0 auto; padding: 18px 0 28px; border-top: 1px solid #d9dce1; color: #9298a2; font-size: 12px; }
+.personal-footer a { color: inherit; font-weight: 400; }
+.personal-footer a:hover { color: #1677ff; }
+article h1, article h2, article h3, .personal-home-feed h2, .personal-home-feed h3 { font-family: Georgia, "Songti SC", "Noto Serif SC", serif; font-weight: 400; }
+
+body[data-slug="index"] .page-header { display: none; }
+body[data-slug="index"] .center > article { max-width: none; }
+body[data-slug="index"] .center > article .markdown-rendered { padding: 10px 0 30px; border-bottom: 1px solid #d9dce1; }
+body[data-slug="index"] .home-eyebrow, .personal-eyebrow { margin: 0; color: #8a8f98; font-size: 11px; letter-spacing: .16em; }
+body[data-slug="index"] article h1 { max-width: 660px; margin: 13px 0 14px; color: #20252d; font-size: clamp(36px, 5vw, 58px); line-height: 1.16; letter-spacing: -.025em; }
+body[data-slug="index"] article p:not(.home-eyebrow) { max-width: 650px; margin: 9px 0; color: #5e6570; font-size: 15px; line-height: 1.8; }
+
+.personal-home-feed { padding-top: 36px; }
+.personal-feed-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 17px; }
+.personal-feed-head h2 { margin: 5px 0 0; color: #20252d; font-size: 29px; line-height: 1.25; }
+.personal-more { padding-bottom: 5px; color: #455161; font-size: 13px; font-weight: 400; }
+.personal-more:hover { color: #1677ff; }
+.personal-feed-layout { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: clamp(32px, 7vw, 92px); align-items: start; }
+.personal-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; padding: 0 0 7px; }
+.personal-filters span { margin-right: 4px; color: #8a8f98; font-size: 12px; }
+.personal-filters a, .personal-tags a { border: 1px solid #d9dce1; border-radius: 999px; padding: 2px 10px; color: #69707b; font-size: 11px; font-weight: 400; line-height: 1.5; }
+.personal-filters a:hover, .personal-filters a.is-current, .personal-tags a:hover { color: #1677ff; border-color: #1677ff; }
+.personal-post-row { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 20px; padding: 23px 0; border-bottom: 1px solid #e8e9ec; }
+.personal-post-row time { padding-top: 5px; color: #8a8f98; font-size: 12px; }
+.personal-post-row h3 { margin: 0; font-size: 24px; line-height: 1.35; }
+.personal-post-row h3 a { color: #20252d; font-weight: 400; }
+.personal-post-row h3 a:hover { color: #1677ff; }
+.personal-excerpt { margin: 8px 0 11px; color: #5e6570; font-size: 13px; line-height: 1.7; }
+.personal-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.personal-empty { padding: 40px 0; color: #8a8f98; }
+.personal-about-aside { padding-top: 18px; }
+.personal-aside-rule { display: block; width: 32px; height: 1px; margin-bottom: 17px; background: #20252d; }
+.personal-about-aside h2 { margin: 0 0 8px; font-size: 20px; }
+.personal-about-aside p { margin: 0 0 17px; color: #5e6570; font-size: 13px; line-height: 1.75; }
+.personal-about-aside a { color: #20252d; font-size: 13px; font-weight: 400; text-decoration: underline; text-underline-offset: 4px; }
+.personal-about-aside a:hover { color: #1677ff; }
+
+body[data-slug="posts/index"] .center > article, body[data-slug="about"] .center > article, body[data-slug^="posts/"]:not([data-slug="posts/index"]) .center > article { max-width: 780px; margin: 0 auto; }
+body[data-slug="posts/index"] .page-header, body[data-slug="about"] .page-header, body[data-slug^="posts/"]:not([data-slug="posts/index"]) .page-header { max-width: 780px; margin-left: auto !important; margin-right: auto !important; }
+.center > article .markdown-rendered { font-size: 16px; line-height: 1.9; }
+.center > article .markdown-rendered blockquote { border-left-color: #1677ff; }
+.page-listing .section-ul { padding: 0; list-style: none; }
+.page-listing .section-li { padding: 20px 0; border-bottom: 1px solid #e8e9ec; }
+.page-listing .section { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 20px; }
+.page-listing .section .meta { grid-column: 1; margin: 5px 0 0; color: #8a8f98; font-size: 12px; }
+.page-listing .section .desc { grid-column: 2; }
+.page-listing .section h3 { font: 400 24px/1.35 Georgia, "Songti SC", serif; }
+.page-listing .section h3 a { color: #20252d; background: none; font-weight: 400; }
+.page-listing .section h3 a:hover { color: #1677ff; }
+.page-listing .section .tags { grid-column: 2; }
+.page-listing .section .tags a { background: none; font-size: 11px; }
+
+@media (max-width: 900px) {
+  .page > #quartz-body > .left.sidebar { position: relative; flex-wrap: wrap; gap: 0; padding: 12px 20px 8px; }
+  .personal-nav { flex-wrap: wrap; gap: 7px; width: 100%; }
+  .personal-brand { min-height: 40px; }
+  .personal-nav-links { order: 2; width: 100%; gap: 22px; overflow-x: auto; }
+  .personal-nav-links a { min-height: 36px; font-size: 13px; }
+  .left.sidebar > .flex-component { position: absolute; top: 14px; right: 20px; }
+  .personal-feed-layout { grid-template-columns: 1fr; }
+  .personal-about-aside { display: none; }
+}
+@media (max-width: 620px) {
+  .page > #quartz-body > .center, .personal-footer { width: calc(100% - 28px); }
+  .page > #quartz-body > .center { padding: 30px 0 42px; }
+  .personal-brand small { display: none; }
+  .personal-brand-mark { width: 32px; height: 32px; }
+  .personal-brand strong { font-size: 15px; }
+  .personal-nav-links { gap: 16px; }
+  .personal-post-row, .page-listing .section { grid-template-columns: 1fr; gap: 5px; }
+  .personal-post-row { padding: 18px 0; }
+  .personal-post-row h3, .page-listing .section h3 { font-size: 21px; }
+  .page-listing .section .meta, .page-listing .section .desc, .page-listing .section .tags { grid-column: 1; }
+  .personal-footer { flex-wrap: wrap; gap: 4px; font-size: 11px; }
 }
 
-article h1,
-article h2,
-article h3 {
-  font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
-  letter-spacing: 0.02em;
-}
