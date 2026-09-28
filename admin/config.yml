@@ -1,0 +1,57 @@
+backend:
+  name: github
+  repo: Hearttttt1/personal-blog
+  branch: main
+  skip_ci: true
+
+media_folder: content/assets
+public_folder: /personal-blog/assets
+
+site_url: https://Hearttttt1.github.io/personal-blog
+
+collections:
+  - name: posts
+    label: 文章
+    label_singular: 文章
+    folder: content/posts
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} · {{published}}"
+    sortable_fields: [published, title]
+    view_groups:
+      - label: 发布状态
+        field: publish
+        pattern: true
+    fields:
+      - name: title
+        label: 标题
+        widget: string
+        required: true
+      - name: published
+        label: 首次发布时间
+        widget: datetime
+        required: false
+        hint: 首次打开“发布”时自动写入；此后保留原时间。
+      - name: modified
+        label: 修改时间
+        widget: datetime
+        required: false
+        hint: 每次保存时自动更新。
+      - name: tags
+        label: 标签
+        widget: list
+        required: false
+      - name: publish
+        label: 发布
+        widget: boolean
+        default: false
+      - name: sync_to_obsidian
+        label: 同步到 Obsidian（预留）
+        widget: boolean
+        default: false
+      - name: body
+        label: 正文
+        widget: markdown
+        modes: [raw, rich_text]

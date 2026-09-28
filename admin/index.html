@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>博客管理</title>
+  </head>
+  <body>
+    <script>window.CMS_MANUAL_INIT = true;</script>
+    <script src="https://unpkg.com/@sveltia/cms@0.187.0/dist/sveltia-cms.js"></script>
+    <script>
+      // 保存前补齐首次发布时间，并在每次保存时更新修改时间。
+      CMS.registerEventListener({
+        name: 'preSave',
+        handler: ({ entry }) => {
+          let data = entry.get('data');
+          const now = new Date().toISOString();
+          if (data.get('publish') === true && !data.get('published')) {
+            data = data.set('published', now);
+          }
+          return data.set('modified', now);
+        },
+      });
+      CMS.init();
+    </script>
+  </body>
+</html>
