@@ -1,7 +1,7 @@
 ---
 title: Note
 published: 2026-09-29T09:07:00
-modified: 2026-09-29T08:59:57.889Z
+modified: 2026-09-29T09:17:13.951Z
 tags: []
 publish: false
 sync_to_obsidian: false
@@ -43,4 +43,6 @@ sync_to_obsidian: false
 
 https://github.com/op7418
 
-![](https://nexttoken.tv/assets/hosts/guizang.webp)
+# Flash模型
+
+# 模型自训练
