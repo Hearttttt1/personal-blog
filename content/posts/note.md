@@ -1,7 +1,7 @@
 ---
 title: Note
 published: 2026-09-29T09:07:00
-modified: 2026-09-29T09:21:57.498Z
+modified: 2026-09-29T09:30:13.059Z
 tags: []
 publish: false
 sync_to_obsidian: false
@@ -48,3 +48,5 @@ https://github.com/op7418
 # 模型自训练
 
 # JEV模型
+
+TypeSafe 官方提供了一个通用的 Skills 技能包，简单理解就是一份配置文件，告诉 AI 编程工具 Jev 是什么、怎么调用、参数怎么传，这样 AI 工具就知道怎么帮你调用 Jev 了。只要安装了 Skills 技能包，所有主流的 AI 编程工具都能用。
