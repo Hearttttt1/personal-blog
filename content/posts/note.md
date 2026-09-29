@@ -1,7 +1,7 @@
 ---
 title: Note
 published: 2026-09-29T09:07:00
-modified: 2026-09-29T09:17:13.951Z
+modified: 2026-09-29T09:21:57.498Z
 tags: []
 publish: false
 sync_to_obsidian: false
@@ -46,3 +46,5 @@ https://github.com/op7418
 # Flash模型
 
 # 模型自训练
+
+# JEV模型
